@@ -11,15 +11,14 @@ def brute_force():
     # Multiset of password hashes in the text file
     file = "/afs/inf.ed.ac.uk/group/teaching/compsec/cw2/password-cracking/rockyou-samples.md5.txt"
     hashes = [line.rstrip('\n') for line in open(file)]
-    pass_hash = Counter(hashes)
+    hash_count = Counter(hashes)
 
     # Check if our generated passwords match any password hashes in the file
     write_file = open("md5-cracked.txt", "w")
     for p in passwords:
         encoded_pass = md5(p.encode()).hexdigest()
-        if (encoded_pass in pass_hash):
-            write_file.write(str(pass_hash[encoded_pass]) + "," + p + "\n")
-    
+        if (encoded_pass in hash_count):
+            write_file.write(str(hash_count[encoded_pass]) + "," + p + "\n")
     write_file.close() 
 
 if __name__ == "__main__":
