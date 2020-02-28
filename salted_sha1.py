@@ -6,7 +6,6 @@ def salted_sha1():
     salted_hash = [line.rstrip('\n') for line in open(file)]
     salts = [(line.rstrip('\n')).split("$")[2] for line in salted_hash]
     hashes = [(line.rstrip('\n')).split("$")[3] for line in salted_hash]
-    # TODO: all counters are 1???
     hash_count = Counter(hashes)
 
     common_passwords = ["123456", "12345", "123456789", "password", "iloveyou",
@@ -18,6 +17,7 @@ def salted_sha1():
     # All possible pairs of salts and passwords
     salted_passwords = [[salt, pwd] for salt in salts for pwd in common_passwords]
 
+    # TODO: all counters are 1???
     # write_file = open("salt-cracked.txt", "w")
     # for (s, p) in salted_passwords:
     #     encoded_pass = sha1((s + p).encode()).hexdigest()
