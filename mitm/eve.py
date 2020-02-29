@@ -55,7 +55,7 @@ elif flag == "--custom":
     dialog.chat('Bob slurred: "{}"'.format(from_Bob))
     dialog.think('Input what you would like Bob to say to Alice')
     to_Bob = input()
-    encrypt_and_send(from_Bob, aes_alice, socket_alice)
+    encrypt_and_send(to_Bob, aes_alice, socket_alice)
 
 # Close the two sockets (with Alice and Bob)
 tear_down(socket_bob, BUFFER_DIR, 'buffer_original')
