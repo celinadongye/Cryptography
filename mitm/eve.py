@@ -9,11 +9,12 @@ player = sys.argv[0].split('.', 1)[0]
 flag = sys.argv[1]
 # whenever Bob sends a message, read it in 'buffer_original'
 # Connect with Bob and perform DHKE
-print(BUFFER_DIR)
-socket_bob, aes = setup('alice', BUFFER_DIR, os.rename(BUFFER_FILE_NAME, os.path.join(BUFFER_DIR, 'buffer_original')))
+socket_bob, aes = setup('alice', BUFFER_DIR, BUFFER_FILE_NAME)
+
 dialog.think('Eve thinks: "Nice, getting there..."')
+os.rename(os.path.join(BUFFER_DIR, BUFFER_FILE_NAME), os.path.join(BUFFER_DIR, 'buffer_original'))
 # Open new socket for Alice and perform DHKE
-socket_alice, aes = setup('bob', BUFFER_DIR, os.rename(BUFFER_FILE_NAME, BUFFER_FILE_NAME))
+socket_alice, aes = setup('bob', BUFFER_DIR, BUFFER_FILE_NAME)
 dialog.think('Eve thinks: "Hehe, it\'s working!"')
 
 if flag == "--relay":
@@ -54,7 +55,7 @@ elif flag == "--custom":
 
 # Close the two sockets
 tear_down(socket_bob, BUFFER_DIR, 'buffer_original')
-tear_down(socket_alice, BUFFER_DIR, 'buffer')
+tear_down(socket_alice, BUFFER_DIR, BUFFER_FILE_NAME)
 
 
 ## info: yellow, chat: green, 
