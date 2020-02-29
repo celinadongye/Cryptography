@@ -16,7 +16,7 @@ def crack_bcrypt():
             if bcrypt.checkpw(b'123456', h.encode()):
                 print("Line: " + str(idx))
                 counter += 1
-                write_file.write(str(idx+1) + " ")
+                write_file.write(str(idx+1) + "\n")
         else:
             break
     write_file.close()
